@@ -52,6 +52,9 @@ The third party software included and used by this project is:
    See https://github.com/MikeOrtiz/TouchImageView
 
  * GLIDE Image Library
- Copyright 2014 Google, Inc. All rights reserved.
- See https://github.com/bumptech/glide/blob/master/LICENSE
- 
+   Copyright 2014 Google, Inc. All rights reserved.
+   See https://github.com/bumptech/glide/blob/master/LICENSE
+   
+ * Floating Action Button 
+   Copyright 2015 Dmytro Tarianyk under http://www.apache.org/licenses/LICENSE-2.0
+   See https://github.com/Clans/FloatingActionButton
