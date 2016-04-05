@@ -1,4 +1,4 @@
-# Cirrus
+# Cirrus for ownCloud
 ownCloud client
 
 OAL is 
