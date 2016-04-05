@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ownCloud Android client application
+
+  Copyright (C) 2012  Bartek Przybylski
+  Copyright (C) 2015 ownCloud Inc.
+
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License version 2,
+  as published by the Free Software Foundation.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+    <style name="Animations" />
+
+    <style name="Theme.synox" parent="Theme.Base"/>
+
+    <!-- General ownCloud app style -->
+    <style name="Theme.Base" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:buttonStyle">@style/Theme.ownCloud.ButtonStyle</item>
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primary_dark</item>
+        <item name="colorAccent">@color/accent</item>
+        <item name="alertDialogTheme">@style/synox.AlertDialog</item>
+        <item name="colorButtonNormal">@color/background_color</item>
+        <item name="colorControlActivated">@color/primary_dark</item>
+        <item name="colorControlHighlight">@color/blue_transparent</item>
+        <item name="android:dialogTheme">@style/synox.Dialog</item>
+        <item name="android:alertDialogTheme">@style/synox.AlertDialog</item>
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+    </style>
+
+    <style name="Theme.synox.noActionBar.Login" parent="Theme.synox">
+        <item name="colorAccent">@color/white</item>
+    </style>
+
+    <style name="synox.AlertDialog" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primary_dark</item>
+        <item name="colorAccent">@color/accent</item>
+        <item name="android:textColorPrimary">@color/primary_text</item>
+        <item name="android:textSize">16sp</item>
+        <item name="buttonBarButtonStyle">@style/Theme.synox.Dialog.ButtonBar.Button</item>
+        <item name="buttonBarStyle">@style/Theme.synox.Dialog.ButtonBar</item>
+    </style>
+
+    <style name="synox.ShareDialog" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primary_dark</item>
+        <item name="colorAccent">@color/accent</item>
+        <item name="android:textColorPrimary">@color/primary_text</item>
+        <item name="colorControlActivated">@color/accent</item>
+        <!-- Used for title -->
+        <item name="windowNoTitle">true</item>
+        <item name="buttonBarButtonStyle">@style/Theme.synox.Dialog.ButtonBar.Button</item>
+        <item name="buttonBarStyle">@style/Theme.synox.Dialog.ButtonBar</item>
+    </style>
+
+    <style name="synox.Dialog.Passcode" parent="synox.Dialog">
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowCloseOnTouchOutside">false</item>
+    </style>
+
+    <style name="synox.Dialog" parent="Theme.AppCompat.Light.Dialog">
+
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primary_dark</item>
+        <item name="colorAccent">@color/accent</item>
+        <item name="android:textColorPrimary">@color/primary_text</item>
+        <item name="colorControlActivated">@color/accent</item>
+        <!-- Used for title -->
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowMinWidthMajor">@android:dimen/dialog_min_width_major</item>
+        <item name="android:windowMinWidthMinor">@android:dimen/dialog_min_width_minor</item>
+        <item name="buttonBarButtonStyle">@style/Theme.synox.Dialog.ButtonBar.Button</item>
+        <item name="buttonBarStyle">@style/Theme.synox.Dialog.ButtonBar</item>
+    </style>
+
+    <style name="ProgressDialogTheme" parent="synox.Dialog">
+        <item name="colorAccent">@color/accent</item>
+        <item name="android:textColorPrimary">@color/primary_text</item>
+        <item name="android:windowFrame">@color/transparent</item>
+        <item name="android:windowBackground">@color/transparent</item>
+        <item name="android:windowTitleBackgroundStyle">@drawable/process_dialog_background</item>
+    </style>
+
+    <style name="Button" parent="Widget.AppCompat.Button.Borderless.Colored">
+        <item name="colorButtonNormal">@color/secondary_button_color</item>
+        <item name="android:textColorPrimary">@color/accent</item>
+    </style>
+
+    <style name="Button.Primary" parent="Button">
+        <item name="colorButtonNormal">@color/primary</item>
+        <item name="android:textColor">@color/primary_text</item>
+    </style>
+
+    <style name="Button.Borderless" parent="Base.Widget.AppCompat.Button.Borderless">
+        <item name="android:textColor">@color/accent</item>
+    </style>
+
+    <!-- Progress bar -->
+    <style name="Widget.synox.TopProgressBar" parent="style/Widget.AppCompat.ProgressBar.Horizontal">
+        <item name="android:progressDrawable">@drawable/actionbar_progress_horizontal</item>
+        <item name="android:indeterminateDrawable">@drawable/actionbar_progress_indeterminate_horizontal</item>
+    </style>
+
+    <style name="Theme.synox.Fullscreen" parent="style/Theme.AppCompat">
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
+    <!-- Button Bar hack due to Lollipop bug:
+        https://code.google.com/p/android/issues/detail?id=78302
+    fix see:
+        http://stackoverflow.com/questions/27187353/dialog-buttons-with-long-text-not-wrapping-squeezed-out-material-theme-on-an
+     -->
+    <style name="Theme.synox.Dialog.ButtonBar" parent="style/Widget.AppCompat.Button.ButtonBar.AlertDialog">
+        <!-- Making sure, the button bar uses parent width and is not restricted in height -->
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:height">@null</item>
+        <item name="android:minHeight">@null</item>
+    </style>
+
+    <style name="Theme.synox.Dialog.ButtonBar.Button" parent="style/Widget.AppCompat.Button.Borderless.Colored">
+        <!-- Setting the weight as follows should result in equally wide buttons filling the alert dialog width,
+            but instead they span further out of the dialog, breaking in multiple lines though -->
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <!-- setting a fixed width as follows results in narrow buttons with line breaks, but of course this is not a solution -->
+        <!-- <item name="android:width">100dp</item> -->
+    </style>
+
+    <style name="ToolbarTitle" parent="@style/TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="ToolbarSubTitle" parent="@style/TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/secondary_text</item>
+    </style>
+
+    <!-- PopDownMenu -->
+    <style name="Animations.PopDownMenu" />
+
+    <style name="Animations.PopDownMenu.Center">
+        <item name="@android:windowEnterAnimation">@anim/grow_from_top</item>
+        <item name="@android:windowExitAnimation">@anim/shrink_from_bottom</item>
+    </style>
+
+    <style name="Animations.PopDownMenu.Left">
+        <item name="@android:windowEnterAnimation">@anim/grow_from_topleft_to_bottomright</item>
+        <item name="@android:windowExitAnimation">@anim/shrink_from_bottomright_to_topleft</item>
+    </style>
+
+    <style name="Animations.PopDownMenu.Right">
+        <item name="@android:windowEnterAnimation">@anim/grow_from_topright_to_bottomleft</item>
+        <item name="@android:windowExitAnimation">@anim/shrink_from_bottomleft_to_topright</item>
+    </style>
+
+    <style name="Animations.PopDownMenu.Reflect">
+        <item name="@android:windowEnterAnimation">@anim/pump_top</item>
+        <item name="@android:windowExitAnimation">@anim/disappear</item>
+    </style>
+
+    <!-- PopUpMenu -->
+    <style name="Animations.PopUpMenu" />
+
+    <style name="Animations.PopUpMenu.Center">
+        <item name="@android:windowEnterAnimation">@anim/grow_from_bottom</item>
+        <item name="@android:windowExitAnimation">@anim/shrink_from_top</item>
+    </style>
+
+    <style name="Animations.PopUpMenu.Left">
+        <item name="@android:windowEnterAnimation">@anim/grow_from_bottomleft_to_topright</item>
+        <item name="@android:windowExitAnimation">@anim/shrink_from_topright_to_bottomleft</item>
+    </style>
+
+    <style name="Animations.PopUpMenu.Right">
+        <item name="@android:windowEnterAnimation">@anim/grow_from_bottomright_to_topleft</item>
+        <item name="@android:windowExitAnimation">@anim/shrink_from_topleft_to_bottomright</item>
+    </style>
+
+    <style name="Animations.PopUpMenu.Reflect">
+        <item name="@android:windowEnterAnimation">@anim/pump_bottom</item>
+        <item name="@android:windowExitAnimation">@anim/disappear</item>
+    </style>
+
+    <style name="PassCodeStyle">
+        <item name="android:layout_width">40dp</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_margin">10dp</item>
+        <item name="android:inputType">numberDecimal</item>
+        <item name="android:numeric">decimal</item>
+        <item name="android:digits">1234567890</item>
+        <item name="android:maxLength">1</item>
+        <item name="android:password">true</item>
+        <item name="android:singleLine">true</item>
+
+    </style>
+
+    <style name="OAuthDialog" parent="style/Theme.AppCompat.Light.Dialog.Alert">
+        <item name="windowNoTitle">false</item>
+        <item name="colorAccent">@color/synox_blue_accent</item>
+    </style>
+
+    <color name="setup_text_hint">#777777</color>
+    <color name="setup_text_typed">#000000</color>
+</resources>

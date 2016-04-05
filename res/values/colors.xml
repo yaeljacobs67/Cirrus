@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ownCloud Android client application
+
+  Copyright (C) 2012  Bartek Przybylski
+  Copyright (C) 2015 ownCloud Inc.
+
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License version 2,
+  as published by the Free Software Foundation.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<resources>
+
+    <color name="synox_blue">#0277BD</color>
+    <color name="synox_blue_accent">#35537A</color>
+    <color name="synox_blue_bright">#00ddff</color>
+
+    <color name="list_item_lastmod_and_filesize_text">#989898</color>
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="textColor">#303030</color>
+    <color name="drawerMenuTextColor">#000000</color>
+    <color name="list_divider_background">#fff0f0f0</color>
+    <color name="filelist_icon_background">#DDDDDD</color>
+    <color name="dark_background_text_color">#EEEEEE</color>
+    <color name="login_text_color">#757575</color>
+    <color name="login_text_hint_color">#757575</color>
+    <color name="primary_button_color">@color/synox_blue_accent</color>
+    <color name="secondary_button_color">#D6D7D7</color>
+    <color name="transparent">#00000000</color>
+
+    <!-- Colors -->
+    <color name="dialog_list_item">#1F1F1F</color>
+
+    <!-- standard material color definitions -->
+    <color name="primary">#F5F5F5</color>
+    <color name="primary_dark">#555555</color>
+    <color name="primary_light">#F5F5F5</color>
+    <color name="accent">@color/synox_blue</color>
+    <color name="secondary_accent">#F57C00</color>
+    <color name="primary_text">#212121</color>
+    <color name="secondary_text">#727272</color>
+    <color name="icons">#212121</color>
+    <color name="divider">#B3B3B3</color>
+
+    <color name="offline_mode">#F44336</color>
+    <color name="grid_transparent">#c8fafafa</color>
+
+    <!-- special transparent action bar colors for image preview -->
+    <color name="blue_transparent">#201D2D44</color>
+    <color name="blue_dark_transparent">#40162233</color>
+</resources>
