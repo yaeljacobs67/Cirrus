@@ -262,42 +262,7 @@ public class FileListListAdapter extends RecyclerView.Adapter<RecyclerViewHolder
     public Vector<OCFile> getCurrentFiles() {
         return mFiles;
     }
-
-    /**
-     * Change the adapted directory for a new one
-     *
-     * @param directory             New file to adapt. Can be NULL, meaning
-     *                              "no content to adapt".
-     * @param updatedStorageManager Optional updated storage manager; used to replace
-     *                              mStorageManager if is different (and not NULL)
-     */
-    public void swapDirectory(final OCFile directory, final FileDataStorageManager updatedStorageManager) {
-
-        mFile = directory;
-        if (updatedStorageManager != null && updatedStorageManager != mStorageManager) {
-            mStorageManager = updatedStorageManager;
-            mAccount = AccountUtils.getCurrentOwnCloudAccount(mContext);
-        }
-        if (mStorageManager != null) {
-
-            mFiles = mStorageManager.getFolderContent(mFile);
-            if (mFiles.size() > 0) {
-
-                if (mFilesOrig != null) {
-                    mFilesOrig.clear();
-                }
-
-                assert mFilesOrig != null;
-                mFilesOrig.addAll(mFiles);
-
-                if (mJustFolders) {
-                    mFiles = getFolders(mFiles);
-                }
-            }
-        }
-    }
-
-
+    
     /**
      * Clear current adapter data
      */
@@ -320,22 +285,23 @@ public class FileListListAdapter extends RecyclerView.Adapter<RecyclerViewHolder
         if (mFiles != null && mFiles.size() > 0) {
 
             mFiles.clear();
-            mFilesOrig.clear();
             mFiles.addAll(nFiles);
 
-            if (mFiles.size() > 0) {
-
-                if (mFilesOrig != null) {
-                    mFilesOrig.clear();
-                }
-
-                assert mFilesOrig != null;
-                mFilesOrig.addAll(mFiles);
-            }
         } else
         {
             mFiles = nFiles;
         }
+
+        if (mFiles != null && mFiles.size() > 0) {
+
+            if (mFilesOrig != null) {
+                mFilesOrig.clear();
+            }
+
+            assert mFilesOrig != null;
+            mFilesOrig.addAll(mFiles);
+        }
+
         // Notifiy adapter of data changes
         notifyDataSetChanged();
     }
