@@ -60,32 +60,25 @@ public class FileListListAdapter extends RecyclerView.Adapter<RecyclerViewHolder
 
     private Context mContext;
     private OCFileListFragment mListFragment;
-    private OCFile mFile;
     private Vector<OCFile> mFiles = new Vector<>();
     private Vector<OCFile> mFilesOrig = new Vector<>();
-    private boolean mJustFolders;
     private int resourceLayout = 0;
 
     private Account mAccount;
     private FileFragment.ContainerActivity mTransferServiceGetter;
     private SharedPreferences mAppPreferences;
-    private FileDataStorageManager mStorageManager;
 
     private static final int TYPE_LIST = 0;
     private static final int TYPE_GRID = 1;
 
-    public FileListListAdapter(boolean justFolders, Context context, OCFileListFragment listFragment, FileFragment.ContainerActivity transferServiceGetter) {
+    public FileListListAdapter(Context context, OCFileListFragment listFragment, FileFragment.ContainerActivity transferServiceGetter) {
 
         setHasStableIds(true);
-        mFile = null;
 
-        mJustFolders = justFolders;
         mContext = context;
         mListFragment = listFragment;
         mAccount = AccountUtils.getCurrentOwnCloudAccount(mContext);
         mTransferServiceGetter = transferServiceGetter;
-        mStorageManager = mTransferServiceGetter.getStorageManager();
-
         mAppPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
 
         // Read sorting order, default to sort by name ascending
@@ -262,18 +255,18 @@ public class FileListListAdapter extends RecyclerView.Adapter<RecyclerViewHolder
     public Vector<OCFile> getCurrentFiles() {
         return mFiles;
     }
-    
+
     /**
      * Clear current adapter data
      */
     public void clearAdapterData(String requestFrom)
     {
         // clear adapter only once
-        mFiles.clear();
-        mFilesOrig.clear();
-        if (requestFrom.equals("onBrowseUp")) {
-            notifyItemRangeRemoved(0,0);
-            notifyItemRangeChanged(0,0);
+        if (mFiles != null) {
+            mFiles.clear();
+            if (requestFrom.equals("onBrowseUp")) {
+                notifyDataSetChanged();
+            }
         }
     }
 
