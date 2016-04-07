@@ -17,8 +17,8 @@
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  -->
 <manifest package="com.synox.android"
-    android:versionCode="10000006"
-    android:versionName="1.0.6" xmlns:android="http://schemas.android.com/apk/res/android">
+    android:versionCode="10000007"
+    android:versionName="1.0.7" xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!-- GET_ACCOUNTS is needed for API < 23.
          For API >= 23 results in the addition of CONTACTS group to the list of permissions that may be
