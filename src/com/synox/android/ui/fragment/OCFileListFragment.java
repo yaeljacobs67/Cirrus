@@ -33,6 +33,7 @@ import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.view.Menu;
@@ -57,7 +58,6 @@ import com.synox.android.ui.dialog.RemoveFileDialogFragment;
 import com.synox.android.ui.dialog.RenameFileDialogFragment;
 import com.synox.android.ui.dialog.UploadSourceDialogFragment;
 import com.synox.android.utils.FileStorageUtils;
-import com.synox.android.widgets.CustomLinearLayoutManager;
 
 import java.io.File;
 import java.util.Vector;
@@ -92,7 +92,7 @@ public class OCFileListFragment extends ExtendedListFragment implements
     private MenuItem layoutView;
     private SearchView searchView;
 
-    private AsyncTask<OCFile, Void, Vector<OCFile>> asyncLoader;
+    public AsyncTask<OCFile, Void, Vector<OCFile>> asyncLoader;
 
     private static final String DIALOG_UPLOAD_SOURCE = "DIALOG_UPLOAD_SOURCE";
     private static final String DIALOG_CREATE_FOLDER = "DIALOG_CREATE_FOLDER";
@@ -195,7 +195,7 @@ public class OCFileListFragment extends ExtendedListFragment implements
             }
         });
 
-        mAdapter = new FileListListAdapter(mJustFolders, getContext(), this, mContainerActivity);
+        mAdapter = new FileListListAdapter(getContext(), this, mContainerActivity);
         setListAdapter(mAdapter);
         mAdapter.notifyDataSetChanged();
 
@@ -345,7 +345,7 @@ public class OCFileListFragment extends ExtendedListFragment implements
 
         switch (viewMode) {
             case 0:
-                mLayoutManager = new CustomLinearLayoutManager(getActivity(), CustomLinearLayoutManager.VERTICAL, false);
+                mLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
                 mAdapter.setResourceLayout(R.layout.list_item);
                 layoutView.setIcon(R.drawable.ic_grid);
                 layoutMode = R.drawable.ic_grid;
@@ -361,7 +361,7 @@ public class OCFileListFragment extends ExtendedListFragment implements
                 layoutMode = R.drawable.ic_list;
                 break;
             default:
-                mLayoutManager = new CustomLinearLayoutManager(getActivity(), CustomLinearLayoutManager.VERTICAL, false);
+                mLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
                 mAdapter.setResourceLayout(R.layout.list_item);
                 layoutView.setIcon(R.drawable.ic_grid);
                 layoutMode = R.drawable.ic_grid;
@@ -499,6 +499,8 @@ public class OCFileListFragment extends ExtendedListFragment implements
                 @Override
                 protected Vector<OCFile> doInBackground(OCFile... params) {
 
+                    if (isCancelled()) return null;
+
                     OCFile tmpDirectory = params[0];
 
                     storageManager = mContainerActivity.getStorageManager();
@@ -520,7 +522,7 @@ public class OCFileListFragment extends ExtendedListFragment implements
                         mFile = tmpDirectory;
                     }
 
-                    if (storageManager != null) {
+                    if (storageManager != null && mAdapter != null) {
 
                         mFetchedFiles = storageManager.getFolderContent(mFile);
                         if (mFetchedFiles.size() > 0) {
@@ -529,7 +531,12 @@ public class OCFileListFragment extends ExtendedListFragment implements
                                 mFetchedFiles = mAdapter.getFolders(mFetchedFiles);
                             }
                         }
+
+                        // sort files
+                        mFetchedFiles = FileStorageUtils.sortFolder(mFetchedFiles);
                     }
+
+
                     return mFetchedFiles;
                 }
 
@@ -548,9 +555,8 @@ public class OCFileListFragment extends ExtendedListFragment implements
                             getListView().scrollToPosition(0);
                         }
 
-                        mAdapter.fillAdapter(nFileList);
-
                         try {
+                            mAdapter.fillAdapter(nFileList);
                             getSupportAB().setSubtitle(mAdapter.generateFileCount());
                         } catch (NullPointerException npe) {
                             // nullpointer exception ignore
