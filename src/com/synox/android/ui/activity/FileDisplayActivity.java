@@ -788,6 +788,12 @@ public class FileDisplayActivity extends FileActivity
 
         if (!isDrawerOpen()) {
             OCFileListFragment listOfFiles = getListOfFilesFragment();
+            if (listOfFiles != null)
+            {
+                listOfFiles.asyncLoader.cancel(true);
+                listOfFiles.setMessageForEmptyList(getString(R.string.file_list_loading));
+            }
+
             if (mDualPane || getSecondFragment() == null) {
                 OCFile currentDir = getCurrentDir();
 
