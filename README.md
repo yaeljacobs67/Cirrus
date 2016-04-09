@@ -1,5 +1,5 @@
 # Cirrus for ownCloud
-ownCloud client
+Android ownCloud client
 
 OAL is 
 https://github.com/owncloud/android-library
